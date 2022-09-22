@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1612503780094233066, guid: 868432087977a004795b24ef8a0e94e4, type: 3}
+      propertyPath: m_Drag
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612503780094233066, guid: 868432087977a004795b24ef8a0e94e4, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6897335297713778729, guid: 868432087977a004795b24ef8a0e94e4, type: 3}
       propertyPath: m_Name
       value: Ball1
