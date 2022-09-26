@@ -30,13 +30,18 @@ namespace RollABall.Managers
         #region Functionality
         private void HealthChange(PlayerArgs args)
         {
-            for (int index = 0; index < cureHearts.Length; index++)            
-                cureHearts[index].sprite = index < args.CurentHP ? filledHeart : emptyHeart;                       
+            try
+            {
+                for (int index = 0; index < cureHearts.Length; index++)
+                    cureHearts[index].sprite = index < args.CurentHP ? filledHeart : emptyHeart;
+            }
+            catch { Debug.LogError("NullReferenceException: FilledHeartSprite or EmptyHeartSprite isn't defined"); }                                             
         }
-
         private void KeysChange(PlayerArgs args)
         {
-            keys.text = args.Keys.ToString();
+            try { keys.text = args.Keys.ToString(); }
+            
+            catch { Debug.LogError("NullReferenceException: KeysQuantityText isn't defined"); }          
         }
 
         public void OnEventRaised(IHead<PlayerArgs> head, PlayerArgs args)
