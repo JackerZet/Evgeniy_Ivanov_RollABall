@@ -1,9 +1,31 @@
+п»їusing RollABall.Args;
+using RollABall.Interfaces;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace RollABall.SO.Events
+namespace RollABall.SO
 {
-    public class PlayerEvent : ScriptableObject
+    [CreateAssetMenu(fileName = "PlayerEvent", menuName = "Roll a ball/Events/Player event", order = 1)]
+    public class PlayerEvent : ScriptableObject, IHead<PlayerArgs>
     {
-        // на третий урок делать буду
+        private readonly List<IObserver<PlayerArgs>> _observers = new();
+
+        public void AddListener(IObserver<PlayerArgs> observer)
+        {
+            if (!_observers.Contains(observer)) _observers.Add(observer);
+        }
+
+        public void RemoveListener(IObserver<PlayerArgs> observer)
+        {
+            if (_observers.Contains(observer)) _observers.Remove(observer);
+        }
+
+        public void Notify(PlayerArgs args)
+        {
+            foreach (var observer in _observers)
+            {
+                observer.OnEventRaised(this, args);
+            }
+        }
     }
 }

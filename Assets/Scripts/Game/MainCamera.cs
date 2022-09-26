@@ -1,3 +1,5 @@
+using RollABall.SO;
+using System.Collections;
 using UnityEngine;
 
 namespace RollABall.Game
@@ -8,6 +10,7 @@ namespace RollABall.Game
         [SerializeField] private float velocity = 5f;
         [SerializeField] private float minHeight = 2f;
         [SerializeField] private float maxHeight = 10f;
+        [SerializeField] private DelegateEvent hitEvent;
         #endregion
 
         #region Consts
@@ -21,15 +24,17 @@ namespace RollABall.Game
         private float _posZ;
         private float _scroll;
         private float _range;
-        private int _isMoving;
+        private int _isMoving;       
         #endregion
 
         #region Monobehaivor methods
         private void LateUpdate()
         {
             Approximation();
-            Moving();                            
+            Moving();
         }
+        private void OnEnable() => hitEvent.RegisterListener(ShakeOnEvent);
+        private void OnDisable() => hitEvent.UnregisterListener(ShakeOnEvent);
         #endregion
 
         #region Functionality
@@ -48,6 +53,19 @@ namespace RollABall.Game
             _posZ = Mathf.Lerp(_posZ, _isMoving * Input.GetAxis(mouseY) * velocity / 10, 0.15f);
 
             transform.Translate(_posZ, 0, -_posX, Space.World);
+        }
+        public void ShakeOnEvent() => StartCoroutine(Shaking());
+        
+        private IEnumerator Shaking()
+        {
+            Vector3 dir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
+            transform.Translate(dir);
+            yield return new WaitForSeconds(0.1f);
+            transform.Translate(-dir);
+            transform.Translate(-dir);
+            yield return new WaitForSeconds(0.1f);
+            transform.Translate(dir);
+            StopCoroutine(Shaking());
         }
         #endregion
     }

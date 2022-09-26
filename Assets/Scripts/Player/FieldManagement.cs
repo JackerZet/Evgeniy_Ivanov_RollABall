@@ -16,20 +16,18 @@ namespace RollABall.Player
         #endregion
 
         #region Fields
-        private float _velX = 0.0f;
-        private float _velZ = 0.0f;
+        private float _velX = 0.0f, _velZ = 0.0f;
         private Rigidbody _rig;
-        private float _rotX;
-        private float _rotZ;
-        private float _delay = 0.17f;       
+        private float _rotX, _rotZ;
+        private float _delay = 0.17f; 
         #endregion
 
         #region MonoBehaviors methods
         private void Start()
         {
-            _rig = GetComponent<Rigidbody>();            
+            _rig = GetComponent<Rigidbody>();   
         }
-        private void Update()
+        private void FixedUpdate()
         {
             RotateField();          
         }

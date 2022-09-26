@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d5e66cb61ed1e2d4d91b8fd4f97027eb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - keys: {instanceID: 0}
+  - filledHeart: {fileID: 21300000, guid: 416d10e3bc03290458ce66a88773d819, type: 3}
+  - emptyHeart: {fileID: 21300000, guid: a861d347797fb8f40a3b82514aa7fd61, type: 3}
+  - playerEvent: {fileID: 11400000, guid: 345e4212b602f17448ad389e5473fe63, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
