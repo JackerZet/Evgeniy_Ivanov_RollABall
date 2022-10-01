@@ -160,5 +160,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 3c8fc42decb066048bb79d248487e16e, type: 2}
-  playerCanvas: {fileID: 0}
+  playerEvent: {fileID: 11400000, guid: 345e4212b602f17448ad389e5473fe63, type: 2}
+  gameEvent: {fileID: 11400000, guid: dac8bf6015553394887a093f637f1c6c, type: 2}
+  delegateEvent: {fileID: 11400000, guid: 4774bd7588a9ea44aa69d66077e9f065, type: 2}
   <CureHP>k__BackingField: 0
+  <Keys>k__BackingField: 0
+  <IsWin>k__BackingField: 0
+  <Invulnerability>k__BackingField: 0

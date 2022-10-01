@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Ball1
   m_EditorClassIdentifier: 
   <MaxHP>k__BackingField: 3
+  <TimeOfInvulnerability>k__BackingField: 2
+  <StartMaterial>k__BackingField: {fileID: 2100000, guid: d5723d634ef34b04fa97450b2c785982, type: 2}
+  <InvulnerabilityMaterial>k__BackingField: {fileID: 2100000, guid: 9272a9bbf6884b54e836af741b5151d8, type: 2}

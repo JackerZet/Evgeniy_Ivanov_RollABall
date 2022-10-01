@@ -6,5 +6,9 @@ namespace RollABall.SO
     public class PlayerStats : ScriptableObject
     {
         [field: SerializeField] public int MaxHP { get; set;}
+        [field: SerializeField] public float TimeOfInvulnerability { get; set; }
+        [field: SerializeField] public Material StartMaterial { get; set; }
+        [field: SerializeField] public Material InvulnerabilityMaterial { get; set; }
+
     }
 }

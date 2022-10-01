@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace RollABall.Managers
 {
-    public class DoorsManager : MonoBehaviour, IObserver<PlayerArgs>
+    public class DoorsManager : MonoBehaviour, IObserver<PlayerArgs>, System.IDisposable
     {
         #region Links
         [SerializeField] private List<Door> doors;
@@ -15,11 +15,12 @@ namespace RollABall.Managers
         #endregion
 
         #region MonoBehaviour methods
-        private void OnEnable() => playerEvent.AddListener(this);
-        private void OnDisable() => playerEvent.RemoveListener(this);
-        
+        private void OnEnable() => playerEvent.AddObserver(this);
+        private void OnDisable() => Dispose();
+
         #endregion
-        
+
+        #region Functionality
         public void OnEventRaised(IHead<PlayerArgs> head, PlayerArgs args)
         {
             foreach(Door d in doors)
@@ -28,5 +29,11 @@ namespace RollABall.Managers
                 else d._isOpen = true; 
             }            
         }
+
+        public void Dispose()
+        {
+            playerEvent.RemovObserver(this);
+        }
+        #endregion
     }
 }

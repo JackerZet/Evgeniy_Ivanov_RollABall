@@ -9,7 +9,7 @@ namespace RollABall.Interactivity
         {
             if (gameobject.TryGetComponent(out PlayerBall player))
             {
-                player.SetWinning();                
+                player.SetWinning();
             }                     
         }
     }

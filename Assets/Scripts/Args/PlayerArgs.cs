@@ -6,13 +6,11 @@ namespace RollABall.Args
     {        
         public int CurentHP { get; }
         public int Keys { get; }
-        public bool IsWin { get;}
 
-        public PlayerArgs (int curentHP, int keys, bool isWin)
+        public PlayerArgs (int curentHP, int keys)
         {
             CurentHP = curentHP;
             Keys = keys;
-            IsWin = isWin;
         }
     }
 }

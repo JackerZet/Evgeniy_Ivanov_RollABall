@@ -11,41 +11,69 @@ namespace RollABall.Player
         #region Links
         [Tooltip("Stats on start game")]
         [SerializeField] private PlayerStats stats;
+
+        [Header("Events")]
         [SerializeField] private PlayerEvent playerEvent;
+        [SerializeField] private GameEvent gameEvent;
+        [SerializeField] private DelegateEvent delegateEvent;
         #endregion
 
-        #region Consts
-        private const string Interactive = nameof(Interactive);
-        #endregion
-
-        #region Properties
+        #region Properties        
         [field: SerializeField] public int CureHP { get; set; }
         [field: SerializeField] public int Keys { get; set; }
-        [field: SerializeField] public bool IsWin { get; set; }       
+        [field: SerializeField] public bool IsWin { get;set; }
+        [field: SerializeField] public bool Invulnerability { get; set; }
         #endregion
 
         #region Fields
-        private bool _isChanged = false;
+        private bool _isChanged;
+        private MeshRenderer _cureMesh;
         #endregion
 
         #region MonoBehaviour methods
         private void Start()
         {           
             CureHP = stats.MaxHP;
-            StartCoroutine(EventToChangeArgs());
+            _cureMesh = GetComponentInChildren<MeshRenderer>();
+            StartCoroutine(Coroutine_ChangeArgs());
         }
         private void OnDestroy()
         {
-            StopCoroutine(EventToChangeArgs());
+            StopCoroutine(Coroutine_ChangeArgs());
         }
         #endregion
 
         #region Functionality
         public void SetHP(IHealthChangeable i)
-        {           
-            CureHP = i.HealthChange(CureHP);
+        {   
+            if(i is IHitting && !Invulnerability)
+            {
+                CureHP = i.HealthChange(CureHP);
+                delegateEvent.RaiseEvent();                                                 
+            }
+            else if(i is not IHitting)
+                CureHP = i.HealthChange(CureHP);
+            
             _isChanged = true;
         }
+        public void SetInvulnerability()
+        {
+            if (!Invulnerability)               
+                StartCoroutine(ChangePlayerAfterHit());           
+        }
+        private IEnumerator ChangePlayerAfterHit()
+        {
+            Invulnerability = true;
+            for (int i = 0; i < stats.TimeOfInvulnerability * 2 ; i++)
+            {
+                _cureMesh.material = stats.InvulnerabilityMaterial;
+                yield return new WaitForSeconds(stats.TimeOfInvulnerability / 8);
+                _cureMesh.material = stats.StartMaterial;
+                yield return new WaitForSeconds(stats.TimeOfInvulnerability / 8);
+            }
+            Invulnerability = false;
+        }
+
 
         public void SetKeys(IKeyAndDoorable i)
         {
@@ -59,7 +87,7 @@ namespace RollABall.Player
             _isChanged = true;
         }
 
-        private IEnumerator EventToChangeArgs()
+        private IEnumerator Coroutine_ChangeArgs()
         {
             while (true)
             {
@@ -72,12 +100,11 @@ namespace RollABall.Player
         {
             if (CureHP > stats.MaxHP) CureHP = stats.MaxHP;
 
-            var args = new PlayerArgs(
+            var playerArgs = new PlayerArgs(
                 CureHP,
-                Keys,
-                IsWin
-                );
-            playerEvent.Notify(args);
+                Keys
+                );                      
+            playerEvent.Notify(playerArgs);           
         }
         #endregion
     }
