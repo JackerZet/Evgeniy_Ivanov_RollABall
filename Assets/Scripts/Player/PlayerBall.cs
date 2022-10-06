@@ -19,6 +19,7 @@ namespace RollABall.Player
         #endregion
 
         #region Properties        
+        [field: Header("Properties")]
         [field: SerializeField] public int CureHP { get; set; }
         [field: SerializeField] public int Keys { get; set; }
         [field: SerializeField] public bool IsWin { get;set; }
@@ -49,7 +50,8 @@ namespace RollABall.Player
             if(i is IHitting && !Invulnerability)
             {
                 CureHP = i.HealthChange(CureHP);
-                delegateEvent.RaiseEvent();                                                 
+                if(delegateEvent != null)
+                    delegateEvent.RaiseEvent();                                                 
             }
             else if(i is not IHitting)
                 CureHP = i.HealthChange(CureHP);
@@ -59,12 +61,22 @@ namespace RollABall.Player
         public void SetInvulnerability()
         {
             if (!Invulnerability)               
-                StartCoroutine(ChangePlayerAfterHit());           
+                StartCoroutine(Coroutine_ChangeBallAfterHit());           
+        }    
+        public void SetKeys(IKeyAndDoorable i)
+        {
+            Keys = i.KeysChange(Keys);
+            _isChanged = true;
         }
-        private IEnumerator ChangePlayerAfterHit()
+        public void SetWinning()
+        {
+            IsWin = true;
+            _isChanged = true;
+        }
+        private IEnumerator Coroutine_ChangeBallAfterHit()
         {
             Invulnerability = true;
-            for (int i = 0; i < stats.TimeOfInvulnerability * 2 ; i++)
+            for (int i = 0; i < stats.TimeOfInvulnerability * 2; i++)
             {
                 _cureMesh.material = stats.InvulnerabilityMaterial;
                 yield return new WaitForSeconds(stats.TimeOfInvulnerability / 8);
@@ -73,20 +85,6 @@ namespace RollABall.Player
             }
             Invulnerability = false;
         }
-
-
-        public void SetKeys(IKeyAndDoorable i)
-        {
-            Keys = i.KeysChange(Keys);
-            _isChanged = true;
-        }
-
-        public void SetWinning()
-        {
-            IsWin = true;
-            _isChanged = true;
-        }
-
         private IEnumerator Coroutine_ChangeArgs()
         {
             while (true)

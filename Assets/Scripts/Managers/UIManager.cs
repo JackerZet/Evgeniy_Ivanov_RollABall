@@ -26,7 +26,9 @@ namespace RollABall.Managers
         [SerializeField] private GameEvent gameEvent;
         #endregion
 
+        #region Event
         [HideInInspector] public Action action;
+        #endregion
 
         #region Fields
         private bool _pause;
@@ -39,7 +41,6 @@ namespace RollABall.Managers
             but_restart.onClick.AddListener(OnClickBut_Restart);
         }
         private void OnDisable() => Dispose();
-
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -52,11 +53,7 @@ namespace RollABall.Managers
         #endregion
 
         #region Functionality
-        private void OnClickBut_Restart()
-        {
-            action.Invoke();
-        }
-
+        private void OnClickBut_Restart() => action.Invoke();
         private void HealthChange(PlayerArgs args)
         {                        
             for (int index = 0; index < cureHearts.Length; index++)
@@ -66,13 +63,11 @@ namespace RollABall.Managers
         {
             keys.text = args.Keys.ToString();       
         }
-
         public void SetValues(PlayerArgs args)
         {
             if (cureHearts != null || filledHeart != null || emptyHeart != null) HealthChange(args);
             if (keys != null) KeysChange(args);
         }
-
         public void OnEventRaised(IHead<GameArgs> head, GameArgs args)
         {
             if(args.IsWinGame == true)
@@ -86,7 +81,6 @@ namespace RollABall.Managers
                 winAndDiePanel.GetComponentInChildren<TMP_Text>().text = "You die >_<";
             }
         }
-
         public void Dispose()
         {
             but_restart.onClick.RemoveAllListeners();

@@ -30,7 +30,6 @@ namespace RollABall.Managers
         #endregion
 
         #region Functionality        
-
         public void OnRestart()
         {           
             SceneManager.LoadScene(0);
@@ -44,7 +43,6 @@ namespace RollABall.Managers
             if (player.IsWin) 
                 gameEvent.Notify(new GameArgs(false, true, null));
         }
-
         public void OnEventRaised(IHead<GameArgs> head, GameArgs args)
         {        
             if (args.IsWinGame == true)
@@ -59,7 +57,6 @@ namespace RollABall.Managers
                 Destroy(player.gameObject);
             }
         }
-
         public void Dispose()
         {
             playerEvent.RemovObserver(this);
