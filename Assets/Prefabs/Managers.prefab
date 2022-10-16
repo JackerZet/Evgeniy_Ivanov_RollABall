@@ -48,10 +48,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  keys: {fileID: 0}
   pauseMenu: {fileID: 0}
-  but_restart: {fileID: 0}
-  winAndDiePanel: {fileID: 0}
+  but_Restart: {fileID: 0}
+  but_ExitToMenu: {fileID: 0}
+  resultPanel: {fileID: 0}
+  winString: You win <3
+  dieString: You die > _ <
   filledHeart: {fileID: 21300000, guid: 416d10e3bc03290458ce66a88773d819, type: 3}
   emptyHeart: {fileID: 21300000, guid: a861d347797fb8f40a3b82514aa7fd61, type: 3}
   gameEvent: {fileID: 11400000, guid: dac8bf6015553394887a093f637f1c6c, type: 2}
@@ -85,7 +87,6 @@ Transform:
   m_Children:
   - {fileID: 1812683404900104377}
   - {fileID: 1812683403642627004}
-  - {fileID: 1812683405159225770}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -137,50 +138,3 @@ MonoBehaviour:
   ui: {fileID: 1812683403642627005}
   playerEvent: {fileID: 11400000, guid: 345e4212b602f17448ad389e5473fe63, type: 2}
   gameEvent: {fileID: 11400000, guid: dac8bf6015553394887a093f637f1c6c, type: 2}
---- !u!1 &1812683405159225769
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1812683405159225770}
-  - component: {fileID: 1812683405159225771}
-  m_Layer: 0
-  m_Name: DoorsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1812683405159225770
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812683405159225769}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1812683403960289689}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1812683405159225771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812683405159225769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac3b4e2ea44529c4ea1a81749d2e61b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doors:
-  - {fileID: 0}
-  playerEvent: {fileID: 11400000, guid: 345e4212b602f17448ad389e5473fe63, type: 2}

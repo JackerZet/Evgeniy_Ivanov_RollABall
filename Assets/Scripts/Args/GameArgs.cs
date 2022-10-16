@@ -2,16 +2,23 @@
 
 namespace RollABall.Args
 {
+    public enum GameResult
+    {
+        None,
+        IsWin,
+        IsDie
+    }
     public class GameArgs : EventArgs
     {
+        
         public bool IsRestart { get; }
-        public bool? IsWinGame { get; }
-        public bool? IsDieGame { get; }        
-        public GameArgs(bool isRestart, bool? isWin = null, bool? isDie = null)
+        public bool IsExitToMenu { get; }
+        public GameResult? ResultGame { get; }       
+        public GameArgs(bool isRestart, bool isExitToMenu, GameResult? result = null)
         {
-            IsWinGame = isWin;
-            IsDieGame = isDie;
+            ResultGame = result;
             IsRestart = isRestart;
+            IsExitToMenu = isExitToMenu;
         }
-    }
+    }    
 }

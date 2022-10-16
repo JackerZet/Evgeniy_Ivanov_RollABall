@@ -1,3 +1,4 @@
+using RollABall.Objects;
 using UnityEngine;
 
 namespace RollABall.SO
@@ -9,6 +10,5 @@ namespace RollABall.SO
         [field: SerializeField] public float TimeOfInvulnerability { get; private set; }
         [field: SerializeField] public Material StartMaterial { get; private set; }
         [field: SerializeField] public Material InvulnerabilityMaterial { get; private set; }
-
     }
 }

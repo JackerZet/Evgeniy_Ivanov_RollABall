@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8187562320950839010}
   - component: {fileID: 1612503780094233066}
   - component: {fileID: 5219513003860529100}
+  - component: {fileID: 6573242574145249728}
   m_Layer: 0
   m_Name: ParentBall
   m_TagString: Player
@@ -164,6 +165,16 @@ MonoBehaviour:
   gameEvent: {fileID: 11400000, guid: dac8bf6015553394887a093f637f1c6c, type: 2}
   delegateEvent: {fileID: 11400000, guid: 4774bd7588a9ea44aa69d66077e9f065, type: 2}
   <CureHP>k__BackingField: 0
-  <Keys>k__BackingField: 0
-  <IsWin>k__BackingField: 0
-  <Invulnerability>k__BackingField: 0
+--- !u!114 &6573242574145249728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6897335297713778729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 386148396bccbb947a5fd22593877a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyEvent: {fileID: 11400000, guid: 34137926ddcd2304cae4532ac772bf12, type: 2}

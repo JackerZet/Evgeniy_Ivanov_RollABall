@@ -2,7 +2,7 @@
 {
     public static class GameData
     {
-        public static string player = "Player";
-        public static string interactable = "Intaractivity";
+        public const string player = "Player";
+        public const string interactable = "Intaractivity";        
     }
 }

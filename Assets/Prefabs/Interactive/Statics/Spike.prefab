@@ -125,7 +125,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7426960934545028450}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.34
@@ -142,6 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d8748b4e08fd04184d96b338d9d5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerRepulsion: 5
   damage: {fileID: 11400000, guid: c3ce90489cea09443baa72150c109178, type: 2}
-  hitEvent: {fileID: 11400000, guid: 4774bd7588a9ea44aa69d66077e9f065, type: 2}
+  powerRepulsion: 5

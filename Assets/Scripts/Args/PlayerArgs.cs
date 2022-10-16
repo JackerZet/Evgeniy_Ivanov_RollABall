@@ -5,12 +5,10 @@ namespace RollABall.Args
     public class PlayerArgs : EventArgs
     {        
         public int CurentHP { get; }
-        public int Keys { get; }
 
-        public PlayerArgs (int curentHP, int keys)
+        public PlayerArgs (int curentHP)
         {
             CurentHP = curentHP;
-            Keys = keys;
         }
     }
 }

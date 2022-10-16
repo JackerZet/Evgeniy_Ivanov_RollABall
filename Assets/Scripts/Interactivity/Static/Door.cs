@@ -1,30 +1,28 @@
 ﻿using RollABall.Interfaces;
 using RollABall.Player;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RollABall.Interactivity
 {
-    public class Door : InteractiveObject, IKeyAndDoorable
+    public class Door : InteractiveObject, ILockable
     {
-        [HideInInspector] public bool _isOpen;
+        public List<int> Index { get; set; } = new();
 
-        protected void OnCollisionEnter(Collision collision)
+        public void Unlock()
         {
-            if (!collision.gameObject.CompareTag("Player")) return;
-            Interaction(collision.gameObject);
+            gameObject.SetActive(false);
         }
-        public int KeysChange(int keys)
+        private void OnCollisionEnter(Collision collision)
         {
-            return keys - 1;
+            base.OnTriggerEnter(collision.collider);
         }
-
         protected override void Interaction(GameObject gameObject)
         {
-            if (_isOpen && gameObject.TryGetComponent(out PlayerBall player))
+            if (gameObject.TryGetComponent(out BunchOfKeys player))
             {
-                player.SetKeys(this);
-                this.gameObject.SetActive(false);
+                player.SetKeys(this);               
             }
-        }
+        }        
     }
 }

@@ -22,48 +22,47 @@ namespace RollABall.Managers
         private void OnEnable() 
         {
             Time.timeScale = 1;
+
             playerEvent.AddObserver(this);
-            gameEvent.AddObserver(this);
-            ui.action += OnRestart;           
+            gameEvent.AddObserver(this);        
         }
         private void OnDisable() => Dispose();
         #endregion
 
-        #region Functionality        
-        public void OnRestart()
-        {           
-            SceneManager.LoadScene(0);
-        }
+        #region Functionality               
         public void OnEventRaised(IHead<PlayerArgs> head, PlayerArgs args)
         {           
-            ui.SetValues(args);
-
-            if (args.CurentHP <= 0)                
-                gameEvent.Notify(new GameArgs(false, null, true));
-            if (player.IsWin) 
-                gameEvent.Notify(new GameArgs(false, true, null));
+            ui.SetValues(args);                                                 
         }
         public void OnEventRaised(IHead<GameArgs> head, GameArgs args)
         {        
-            if (args.IsWinGame == true)
-            {
-                Debug.Log("You win)");
+            if (args.IsRestart == true)            
+                OnRestart();
+
+            if (args.IsExitToMenu == true)
+                OnExitToMenu();
+
+            if (args.ResultGame != GameResult.None)            
                 Time.timeScale = 0;
-            }
-            if (args.IsDieGame == true)
-            {
-                Debug.Log("You die(");
-                Time.timeScale = 0;
-                Destroy(player.gameObject);
-            }
+            
+            if (args.ResultGame == GameResult.IsDie)                    
+                Destroy(player.gameObject);            
+        }
+        private void OnRestart()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        private void OnExitToMenu()
+        {
+            SceneManager.LoadScene(0);
         }
         public void Dispose()
         {
             playerEvent.RemovObserver(this);
             gameEvent.RemovObserver(this);
             ui.action -= OnRestart;
+            ui.action -= OnExitToMenu;
         }
-
         #endregion
     }
 }

@@ -5,7 +5,7 @@ using static UnityEngine.Mathf;
 
 namespace RollABall.Game
 {
-    public class MainCamera : MonoBehaviour
+    public class MainCameraController : MonoBehaviour
     {
         #region Links
         [SerializeField] private float velocity = 5f;
@@ -24,10 +24,11 @@ namespace RollABall.Game
         private const string mouseY = "Mouse Y";
         #endregion
 
-        #region Fields
+        #region Statics
         private static float sin45 = Sin(45f);
-        private static float angleX = -90;
-        
+        #endregion
+
+        #region Fields
         Vector3 _dir;
         private int _isMoving;
 
@@ -35,30 +36,24 @@ namespace RollABall.Game
         private float _range;
 
         private float _rot;
+        private float _angleX;
         private int _isRotating;
         #endregion
 
         #region Monobehaivor methods
+        private void Awake() => _angleX = transform.eulerAngles.y;
         private void LateUpdate()
         {
             Rotating();
             Moving();           
-            Approximation();
+            Approximate();
         }
-        private void OnEnable() 
-        {
-            try { hitEvent.RegisterListener(ShakeOnEvent); }
-            catch { }
-        }
-        private void OnDisable()
-        {
-            try { hitEvent.UnregisterListener(ShakeOnEvent); }
-            catch { }
-        }
+        private void OnEnable() => hitEvent?.RegisterListener(ShakeOnEvent);       
+        private void OnDisable() => hitEvent?.UnregisterListener(ShakeOnEvent);        
         #endregion
 
         #region Functionality
-        private void Approximation()
+        private void Approximate()
         {
             _scroll = Clamp(Input.GetAxis(mouseScroll), transform.position.y < maxHeight ? -1f : 0f, transform.position.y > minHeight ? 1f : 0f);
             _range = Lerp(_range, _scroll * velocity, 0.15f);
@@ -83,7 +78,7 @@ namespace RollABall.Game
 
             _rot += _isRotating * Input.GetAxis(mouseX) * velocity / 1.5f;
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(45f, Clamp(_rot, -angleLimit, angleLimit) + angleX, 0) , 0.15f * Time.timeScale);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(45f, Clamp(_rot, -angleLimit, angleLimit) + _angleX, 0) , 0.15f * Time.timeScale);
         }
         public void ShakeOnEvent() => StartCoroutine(Shaking());     
         private IEnumerator Shaking()

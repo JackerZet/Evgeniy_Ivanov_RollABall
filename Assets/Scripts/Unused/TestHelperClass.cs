@@ -16,7 +16,7 @@ namespace RollABall
             {
                 try
                 {
-                    if (str[i] != null) length++;
+                    //if (str[i] != null) length++;
                 }
                 catch
                 {

@@ -6,9 +6,9 @@ namespace RollABall.Interactivity
     {
         protected virtual void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag(GameData.player)) return;            
-            Interaction(other.gameObject);            
-        }
+            if (!other.gameObject.CompareTag(GameData.player)) return;
+            Interaction(other.gameObject);
+        }        
         protected abstract void Interaction(GameObject gameobject);
     }
 }
