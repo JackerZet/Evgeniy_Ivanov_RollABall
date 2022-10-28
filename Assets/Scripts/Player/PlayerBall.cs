@@ -62,8 +62,11 @@ namespace RollABall.Player
             }
 
             _isChanged = true;
-        }               
-        public void SetWinning() => gameEvent.Notify(new GameArgs(false, false, GameResult.IsWin));
+        }
+        public void SetWinning()
+        {
+            gameEvent.Notify(new GameArgs(false, false, GameResult.IsWin));
+        }
         private IEnumerator Coroutine_ChangeBallAfterHit()
         {
             _invulnerability = true;

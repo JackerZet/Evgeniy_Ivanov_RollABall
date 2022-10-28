@@ -15,7 +15,6 @@ namespace RollABall.Data
         {
             var str = System.IO.File.ReadAllText(path);
             return JsonUtility.FromJson<T>(str);
-
         }
         private string CryptoXOR(string str, int key = 42)
         {

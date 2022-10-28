@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace RollABall.Managers
 {
-    public class GameManager : MonoBehaviour, IObserver<PlayerArgs>, IObserver<GameArgs>, System.IDisposable
+    public class GameManager : MonoBehaviour, IObserver<PlayerArgs>, IObserver<GameArgs> ,System.IDisposable
     {
         #region Links
         [SerializeField] private PlayerBall player;

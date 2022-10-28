@@ -6,6 +6,7 @@ namespace RollABall.Data
 {
     public class LevelPositionsData
     {
+        public string type;
         public List<Vector3_Serializable> positions;
     }
     
