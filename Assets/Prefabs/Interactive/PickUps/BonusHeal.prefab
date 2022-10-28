@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7167790006269110909}
   - component: {fileID: 3509601620031769692}
-  - component: {fileID: 4392395348983099104}
+  - component: {fileID: 7373203177671172787}
   m_Layer: 0
   m_Name: BonusHeal
   m_TagString: Interactive
@@ -130,7 +130,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &4392395348983099104
+--- !u!114 &7373203177671172787
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5827105871979265304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778a9033adb512145b59ed70948f51a7, type: 3}
+  m_Script: {fileID: 11500000, guid: ba84f0f669fdc94459ab151c93c773f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   heal: {fileID: 11400000, guid: c3ce90489cea09443baa72150c109178, type: 2}

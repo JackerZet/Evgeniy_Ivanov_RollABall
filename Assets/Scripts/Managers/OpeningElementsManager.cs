@@ -1,48 +1,29 @@
-﻿using RollABall.Args;
-using RollABall.Interfaces;
-using RollABall.Objects;
-using RollABall.SO;
-using System;
+﻿using RollABall.Objects;
 using UnityEngine;
 
 namespace RollABall.Managers
 {
-    public class OpeningElementsManager : MonoBehaviour//, IObserver<KeyArgs>, System.IDisposable
-    {
-        
-        #region Links
-
+    public class OpeningElementsManager : MonoBehaviour
+    {       
+        #region Link
         [SerializeField] public OpeningGroup[] openingGroups;
-        
-        //[SerializeField] private KeyEvent keyEvent;
         #endregion
 
-        #region MonoBehaviour methods
+        #region MonoBehaviour method
         private void OnEnable() 
         { 
-            //keyEvent?.AddObserver(this);
-
             foreach (var group in openingGroups)
-                group.SetId(group.GetHashCode());
-            
-            
+            {
+                try
+                {
+                    group.SetId(group.GetHashCode());
+                }
+                catch
+                {
+                    Debug.LogWarning("The one of opening groups isn't complete. This group is removed. ");
+                }
+            }                                
         }
-        //private void OnDisable() => Dispose();
         #endregion
-
-        #region Functionality
-        /*public void OnEventRaised(IHead<KeyArgs> head, KeyArgs args)
-        {
-            foreach (var group in openingGroups)
-            {              
-                //d.isOpenable = args.Keys == 0 ? false : true;                
-            }
-        }*/
-        /*public void Dispose()
-        {
-            //keyEvent?.RemovObserver(this);
-        }*/
-        #endregion
-    }
-    
+    }   
 }

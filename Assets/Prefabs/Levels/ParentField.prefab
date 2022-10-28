@@ -79,8 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d92f5dd63da8c44b1669d268672b0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angleOfRotation: 8
   player: {fileID: 0}
+  angleOfRotation: 8
 --- !u!54 &2882722325812584657
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &3042041147928077079

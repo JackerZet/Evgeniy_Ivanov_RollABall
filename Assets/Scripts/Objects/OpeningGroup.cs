@@ -1,6 +1,5 @@
 ﻿using RollABall.Interactivity;
 using System;
-using System.Runtime.Serialization;
 using UnityEngine;
 
 namespace RollABall.Objects
@@ -15,9 +14,9 @@ namespace RollABall.Objects
         public void SetId(int id)
         {
             Id = id;
-                  
+                       
             Openable.Index.Add(id);
-            Locked.Index.Add(id);           
+            Locked.Index.Add(id);                     
         }             
     }
 }
