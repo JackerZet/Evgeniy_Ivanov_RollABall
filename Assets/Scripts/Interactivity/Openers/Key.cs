@@ -1,25 +1,15 @@
 ﻿using RollABall.Player;
-using System.Collections;
 using UnityEngine;
 
 namespace RollABall.Interactivity
 {
     public class Key : Opener
     {
-
-        private Vector3 _closestPoint;
-            
-        public override void Open()
+        //private Vector3 _closestPoint;           
+        public void Open(Locked locker)
         {
-            gameObject.SetActive(false);
-            //Destroy(gameObject);
-        }
-        public Vector3 FollowWitnDistance(Vector3 follower, Vector3 target, float height, float distance, float speed)
-        {
-            Vector3 curePos = target - (target - follower).normalized * distance;
-            curePos.y += height;
-
-            return Vector3.Lerp(follower, curePos, speed * Time.deltaTime);
+            locker.OnOpening(this);
+            gameObject.SetActive(false);           
         }
 
         protected override void Interaction(GameObject gameObject)
@@ -29,7 +19,9 @@ namespace RollABall.Interactivity
                 player.SetKeys(this);
             }
         }
+
         
+
         /*protected override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);

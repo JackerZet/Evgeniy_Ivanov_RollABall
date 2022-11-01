@@ -3,7 +3,7 @@ using UnityEngine;
 namespace RollABall.Player
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class FieldController : MonoBehaviour
+    public class FieldManagment : MonoBehaviour
     {
         #region Links
         [SerializeField] private Transform player;
@@ -34,7 +34,7 @@ namespace RollABall.Player
         private void RotateField()
         {
             if (player == null) return;
-            _delay = 0.17f * Mathf.Sqrt(Vector3.Distance(transform.position, player.position));
+            _delay = 0.17f * Mathf.Pow(Vector3.Distance(transform.position, player.position), 0.55f);
 
             _rotX = Mathf.SmoothDamp(_rotX, Input.GetAxis(horisontal) * angleOfRotation, ref _velX, _delay);
             _rotZ = Mathf.SmoothDamp(_rotZ, Input.GetAxis(vertical) * angleOfRotation, ref _velZ, _delay);

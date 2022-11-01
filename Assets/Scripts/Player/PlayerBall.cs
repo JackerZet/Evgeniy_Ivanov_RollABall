@@ -59,8 +59,7 @@ namespace RollABall.Player
             else if (i is not IHitting)
             {
                 CureHP = i.HealthChange(CureHP);
-            }
-
+            }           
             _isChanged = true;
         }
         public void SetWinning()

@@ -5,7 +5,7 @@ using static UnityEngine.Mathf;
 
 namespace RollABall.Game
 {
-    public class MainCameraController : MonoBehaviour
+    public class MainCameraManagment : MonoBehaviour
     {
         #region Links
         [SerializeField] private float velocity = 5f;

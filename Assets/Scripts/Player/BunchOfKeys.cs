@@ -1,28 +1,28 @@
-﻿using RollABall.Args;
-using RollABall.Interactivity;
-using RollABall.Interfaces;
-using RollABall.SO;
+﻿using RollABall.Interactivity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+//using RollABall.SO;
+//using RollABall.Args;
 
 namespace RollABall.Player
 {
     public class BunchOfKeys : MonoBehaviour
     {
         #region Links
-        [SerializeField] private KeyEvent keyEvent;
+        //[SerializeField] private KeyEvent keyEvent;
         #endregion
 
         #region Properties
-        [field: SerializeField] public float Distance { get; private set; } = 1f;
-        [field: SerializeField] public float Speed { get; private set; } = 2f;        
+        [field: SerializeField] public float DistanceBetweenKeys { get; private set; } = 1f;
+        [field: SerializeField] public float SpeedOfKeys { get; private set; } = 2f;        
         public List<Key> CollectedKeys => _collectedKeys.Keys.ToList();
         #endregion
 
-        #region Fields
+        #region Readonly's
         private readonly Dictionary<Key, IEnumerator> _collectedKeys = new();
+        private readonly float _height = 0.05f;
         #endregion
 
         #region Monobehavior methods
@@ -33,7 +33,7 @@ namespace RollABall.Player
         #endregion
 
         #region Functionality
-        public void SetKeys(IIndexHaving i)
+        public void SetKeys(InteractiveObject i)
         {
             if (i is Key gettingKey)
             {
@@ -45,28 +45,26 @@ namespace RollABall.Player
                 
                 //keyEvent.Notify(new KeyArgs(KeyArgs.KeysAction.Add, gettingKey));
             }
-            else if (i is Door door && CollectedKeys.Any())
+            else if (i is Locked door && CollectedKeys.Any())
             {
-                var suitableKeys = CollectedKeys.Where(key => key.Index.Intersect(door.Index).Any());
+                var suitableKey = CollectedKeys.Find(key => key.Lockeds.Any(suitableDoor => suitableDoor == door));
 
-                if (suitableKeys.Any())
+                if (suitableKey != null)
                 {
-                    var suitableKey = suitableKeys.First();                                       
-
                     RemoveKey(suitableKey);
                     
-                    suitableKey.Open();
-                    door.Unlock();
+                    suitableKey.Open(door);
                 }              
             }
         }
-        public Vector3 FollowWitnDistance(Vector3 follower, Vector3 target, float height)
+        public Vector3 FollowWitnDistance(Vector3 follower, Vector3 target)
         {
-            Vector3 curePos = target - (target - follower).normalized * Distance;
-            curePos.y += height;
+            Vector3 curePos = target - (target - follower).normalized * DistanceBetweenKeys;
+            curePos.y += _height;
 
-            return Vector3.Lerp(follower, curePos, Speed * Time.deltaTime);
+            return Vector3.Lerp(follower, curePos, SpeedOfKeys * Time.deltaTime);
         }
+
         private void AddKey(Key key, IEnumerator enumerator)
         {
             _collectedKeys.Add(key, enumerator);
@@ -76,14 +74,15 @@ namespace RollABall.Player
         {
             StopCoroutine(_collectedKeys[key]);
             _collectedKeys.Remove(key);            
-        }        
+        }    
+        
         private IEnumerator Coroutine_Follow(Key curentKey, Transform target)
         {
             while (true)
             {
                 while (target.gameObject.activeInHierarchy)
                 {                                                                                  
-                    curentKey.transform.position = FollowWitnDistance(curentKey.transform.position, target.position, 0.05f);                    
+                    curentKey.transform.position = FollowWitnDistance(curentKey.transform.position, target.position);                    
                     //key.Collise(ref _dir);                
                     yield return new WaitForFixedUpdate();
                 }             

@@ -1,5 +1,4 @@
 ﻿using UnityEditor;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 namespace RollABall.Editor
@@ -12,10 +11,10 @@ namespace RollABall.Editor
             Debug.Log("Good luck");
             Debug.LogWarning("Good luck");
         }
-        [MenuItem("Tools/Creator of walls &_c")]
+        [MenuItem("Tools/Creator of objects &c")]
         public static void CreateWalls()
         {
-            EditorWindow.GetWindow(typeof(CreatorOfWalls), false, "Creator of walls");
+            EditorWindow.GetWindow(typeof(CreatorOfObjects), false, "Creator of objects");
         }
     }
 }

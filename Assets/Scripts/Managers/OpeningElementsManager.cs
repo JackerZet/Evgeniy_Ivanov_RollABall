@@ -6,7 +6,7 @@ namespace RollABall.Managers
     public class OpeningElementsManager : MonoBehaviour
     {       
         #region Link
-        [SerializeField] public OpeningGroup[] openingGroups;
+        [SerializeField] private OpeningGroup[] openingGroups;
         #endregion
 
         #region MonoBehaviour method
@@ -16,13 +16,21 @@ namespace RollABall.Managers
             {
                 try
                 {
-                    group.SetId(group.GetHashCode());
+                    group.SetGroup();
+                    group.Init();
                 }
                 catch
                 {
                     Debug.LogWarning("The one of opening groups isn't complete. This group is removed. ");
-                }
-            }                                
+                }               
+            }
+        }
+        private void OnDisable()
+        {
+            foreach(var group in openingGroups)
+            {
+                group.Dispose();
+            }             
         }
         #endregion
     }   

@@ -5,18 +5,23 @@ using UnityEngine;
 namespace RollABall.Objects
 {
     [Serializable]
-    public class OpeningGroup
+    public class OpeningGroup : IDisposable
     {
-        [field: SerializeField] public Opener Openable { get; private set; }
-        [field: SerializeField] public Door Locked { get; private set; }
-
-        public int Id { get; private set; }
-        public void SetId(int id)
+        [field: SerializeField] public Opener Opener { get; private set; }
+        [field: SerializeField] public Locked Locked { get; private set; }
+        public void SetGroup()
         {
-            Id = id;
-                       
-            Openable.Index.Add(id);
-            Locked.Index.Add(id);                     
-        }             
+            Opener.Lockeds.Add(Locked);
+            //Locked.Openers.Add(Opener);
+        }  
+        
+        public void Init()
+        {
+            Locked.Init(Opener);
+        }
+        public void Dispose()
+        {
+            Locked.Dispose(Opener);
+        }
     }
 }
